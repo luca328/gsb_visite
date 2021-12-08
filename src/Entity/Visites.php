@@ -30,7 +30,7 @@ class Visites
     private $vst_commentaire;
 
     /**
-     * @ORM\ManyToOne(targetEntity=praticien::class, inversedBy="pra_visites")
+     * @ORM\ManyToOne(targetEntity=Praticien::class, inversedBy="pra_visites")
      */
     private $vst_praticien;
 
