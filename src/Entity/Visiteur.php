@@ -59,9 +59,15 @@ class Visiteur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $vis_visites;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Praticien::class, mappedBy="praticien_visiteur")
+     */
+    private $praticiens;
+
     public function __construct()
     {
         $this->vis_visites = new ArrayCollection();
+        $this->praticiens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,6 +220,33 @@ class Visiteur implements UserInterface, PasswordAuthenticatedUserInterface
             if ($visVisite->getVstVisiteur() === $this) {
                 $visVisite->setVstVisiteur(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Praticien[]
+     */
+    public function getPraticiens(): Collection
+    {
+        return $this->praticiens;
+    }
+
+    public function addPraticien(Praticien $praticien): self
+    {
+        if (!$this->praticiens->contains($praticien)) {
+            $this->praticiens[] = $praticien;
+            $praticien->addPraticienVisiteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePraticien(Praticien $praticien): self
+    {
+        if ($this->praticiens->removeElement($praticien)) {
+            $praticien->removePraticienVisiteur($this);
         }
 
         return $this;

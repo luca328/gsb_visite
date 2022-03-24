@@ -66,9 +66,15 @@ class Praticien
      */
     private $pra_visites;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Visiteur::class, inversedBy="praticiens")
+     */
+    private $praticien_visiteur;
+
     public function __construct()
     {
         $this->pra_visites = new ArrayCollection();
+        $this->praticien_visiteur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,6 +204,30 @@ class Praticien
                 $praVisite->setVstPraticien(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Visiteur[]
+     */
+    public function getPraticienVisiteur(): Collection
+    {
+        return $this->praticien_visiteur;
+    }
+
+    public function addPraticienVisiteur(Visiteur $praticienVisiteur): self
+    {
+        if (!$this->praticien_visiteur->contains($praticienVisiteur)) {
+            $this->praticien_visiteur[] = $praticienVisiteur;
+        }
+
+        return $this;
+    }
+
+    public function removePraticienVisiteur(Visiteur $praticienVisiteur): self
+    {
+        $this->praticien_visiteur->removeElement($praticienVisiteur);
 
         return $this;
     }
