@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: update code
-        run: | 
+        run:
           cd /var/www/app1
           sudo git fetch origin
           sudo git reset --hard origin/master  &&  echo 'You are doing well'
