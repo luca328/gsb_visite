@@ -1,0 +1,3 @@
+<?php //route_name_4176f615dcb6e92e72640717ac1ab523
+
+return [PHP_INT_MAX, 'api_praticiens_get_item'];

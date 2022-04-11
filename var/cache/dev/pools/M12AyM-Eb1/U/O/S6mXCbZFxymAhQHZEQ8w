@@ -1,0 +1,3 @@
+<?php //route_name_ae005d9206519224703aa11ae7f309b6
+
+return [PHP_INT_MAX, 'api_visites_get_collection'];
